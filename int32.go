@@ -7,12 +7,12 @@ type Int32 struct {
 	v int32
 }
 
-// Get will get the current value
-func (i *Int32) Get() (n int32) {
+// Load will get the current value
+func (i *Int32) Load() (n int32) {
 	return atomic.LoadInt32(&i.v)
 }
 
-// Add will add n to the current value
+// Add will increment the current value by n
 func (i *Int32) Add(n int32) (new int32) {
 	return atomic.AddInt32(&i.v, n)
 }

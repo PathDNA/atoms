@@ -7,12 +7,12 @@ type Int64 struct {
 	v int64
 }
 
-// Get will get the current value
-func (i *Int64) Get() (n int64) {
+// Load will get the current value
+func (i *Int64) Load() (n int64) {
 	return atomic.LoadInt64(&i.v)
 }
 
-// Add will add n to the current value
+// Add will increment the current value by n
 func (i *Int64) Add(n int64) (new int64) {
 	return atomic.AddInt64(&i.v, n)
 }

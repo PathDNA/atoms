@@ -8,7 +8,7 @@ var testUint32Value uint32
 
 func TestUint32(t *testing.T) {
 	var u Uint32
-	if val := u.Get(); val != 0 {
+	if val := u.Load(); val != 0 {
 		t.Fatalf(testErrInvalidValueFmt, 0, val)
 	}
 
@@ -37,5 +37,5 @@ func BenchmarkUint32(b *testing.B) {
 		u.Add(1)
 	}
 
-	testUint32Value = u.Get()
+	testUint32Value = u.Load()
 }

@@ -6,7 +6,7 @@ import (
 
 func TestInt64(t *testing.T) {
 	var i Int64
-	if val := i.Get(); val != 0 {
+	if val := i.Load(); val != 0 {
 		t.Fatalf(testErrInvalidValueFmt, 0, val)
 	}
 
