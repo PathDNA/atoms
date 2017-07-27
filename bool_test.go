@@ -1,6 +1,9 @@
 package atoms
 
-import "testing"
+import (
+	"encoding/json"
+	"testing"
+)
 
 func TestBool(t *testing.T) {
 	var b Bool
@@ -27,4 +30,20 @@ func TestBool(t *testing.T) {
 	if b.Get() {
 		t.Fatal("invalid state")
 	}
+}
+
+func TestBoolJSON(t *testing.T) {
+	var ts testBool
+	b := []byte(`{ "state" : true }`)
+	if err := json.Unmarshal(b, &ts); err != nil {
+		t.Fatal(err)
+	}
+
+	if !ts.State.Get() {
+		t.Fatal("received a false negative")
+	}
+}
+
+type testBool struct {
+	State Bool `json:"state"`
 }

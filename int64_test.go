@@ -1,6 +1,7 @@
 package atoms
 
 import (
+	"encoding/json"
 	"testing"
 )
 
@@ -27,4 +28,20 @@ func TestInt64(t *testing.T) {
 	}
 
 	return
+}
+
+func TestInt64JSON(t *testing.T) {
+	var ts testInt64
+	b := []byte(`{ "number" : 7 }`)
+	if err := json.Unmarshal(b, &ts); err != nil {
+		t.Fatal(err)
+	}
+
+	if val := ts.Number.Load(); val != 7 {
+		t.Fatalf(testErrInvalidValueFmt, 7, val)
+	}
+}
+
+type testInt64 struct {
+	Number Int64 `json:"number"`
 }

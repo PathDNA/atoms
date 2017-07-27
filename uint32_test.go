@@ -1,6 +1,7 @@
 package atoms
 
 import (
+	"encoding/json"
 	"testing"
 )
 
@@ -38,4 +39,20 @@ func BenchmarkUint32(b *testing.B) {
 	}
 
 	testUint32Value = u.Load()
+}
+
+func TestUint32JSON(t *testing.T) {
+	var ts testUint32
+	b := []byte(`{ "number" : 7 }`)
+	if err := json.Unmarshal(b, &ts); err != nil {
+		t.Fatal(err)
+	}
+
+	if val := ts.Number.Load(); val != 7 {
+		t.Fatalf(testErrInvalidValueFmt, 7, val)
+	}
+}
+
+type testUint32 struct {
+	Number Uint32 `json:"number"`
 }
