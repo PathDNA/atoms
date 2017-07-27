@@ -9,6 +9,9 @@ func main() {
 	var i atoms.Int64
 	// Set value to 7
 	i.Store(7)
+	current := i.Load()
+	fmt.Printf("Current value: %d\n", current)
+
 	// Swap value with 13, returned value will be our old value
 	old := i.Swap(13)
 	fmt.Printf("Old value: %d\n", old)
