@@ -8,7 +8,7 @@ Atoms is a QoL helper library which provides atomic primitives. The goal of this
 - uint32
 - uint64
 - boolean
-
+- Value (interface{})
 ## Features
 ### Numeric values
 - Load
@@ -21,6 +21,11 @@ Atoms is a QoL helper library which provides atomic primitives. The goal of this
 - Get
 - Set (Compare and swap functionality)
 - JSON Marshal/Unmarshal
+
+### Generic
+- Get
+- Set (Compare and swap functionality)
+- JSON Marshal/Unmarshal with optional types.
 
 ## Usage
 ### Int64
@@ -80,6 +85,36 @@ func main() {
 	// Get current state
 	state = b.Get()
 	fmt.Printf("State: %v\n", state)
+}
+
+```
+
+### Value
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/Path94/atoms"
+)
+
+func main() {
+	type dummy struct {
+		V int `json:"v"`
+	}
+	var v atoms.Value
+
+	// set the internal type
+	v.Store(&dummy{})
+
+	b := []byte(`{ "v" : 0xB00F }`)
+	if err := json.Unmarshal(b, &v); err != nil {
+		t.Fatal(err)
+	}
+	dv, _  := v.Load().(*dummy)
+
+	fmt.Printf("%#+v", dv)
+	fmt.Printf("0x%X", dv.V)
 }
 
 ```
