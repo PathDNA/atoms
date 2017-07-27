@@ -11,15 +11,15 @@ The goal of this library is to reduce the amount of mundane boilplate code assoc
 - uint64
 - boolean
 
-### Features
-#### Numeric values
+## Features
+### Numeric values
 - Load
 - Store
 - Swap
 - CompareAndSwap
 - JSON Marshal/Unmarshal
 
-#### Boolean
+### Boolean
 - Get
 - Set (Compare and swap functionality)
 - JSON Marshal/Unmarshal
