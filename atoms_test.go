@@ -1,4 +1,4 @@
-package atomic
+package atoms
 
 const (
 	testErrInvalidValueFmt = "Invalid value, expected %d and received %d"
