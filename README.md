@@ -1,19 +1,29 @@
 # Atoms [![GoDoc](https://godoc.org/github.com/Path94/atoms?status.svg)](https://godoc.org/github.com/Path94/atoms) ![Status](https://img.shields.io/badge/status-beta-yellow.svg) [![Go Report Card](https://goreportcard.com/badge/github.com/Path94/atoms)](https://goreportcard.com/report/github.com/Path94/atoms)
 
-Atoms is a QoL helper library which provides atomic primitives. The following primitives are provided:
+Atoms is a QoL helper library which provides atomic primitives. 
 
+## Purpose
+The goal of this library is to reduce the amount of mundane boilplate code associated with managing atomic-friendly values
+
+## Provided primitives
 - int32
 - int64
 - uint32
 - uint64
 - boolean
 
+## Features
+### Numeric values
+- Load
+- Store
+- Swap
+- CompareAndSwap
+- JSON Marshal/Unmarshal
 
-
-## Purpose
-The goal of this library is to reduce the amount of mundane boilplate code associated with managing atomic-friendly values
-
-
+### Boolean
+- Get
+- Set (Compare and swap functionality)
+- JSON Marshal/Unmarshal
 
 ## Usage
 ### Int64
