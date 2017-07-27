@@ -17,6 +17,11 @@ func (i *Int64) Add(n int64) (new int64) {
 	return atomic.AddInt64(&i.v, n)
 }
 
+// Store will perform an atomic store for a new value
+func (i *Int64) Store(new int64) {
+	atomic.StoreInt64(&i.v, new)
+}
+
 // Swap will perform an atomic swap for a new value
 func (i *Int64) Swap(new int64) (old int64) {
 	return atomic.SwapInt64(&i.v, new)

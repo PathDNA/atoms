@@ -17,6 +17,11 @@ func (u *Uint64) Add(n uint64) (new uint64) {
 	return atomic.AddUint64(&u.v, n)
 }
 
+// Store will perform an atomic store for a new value
+func (u *Uint64) Store(new uint64) {
+	atomic.StoreUint64(&u.v, new)
+}
+
 // Swap will perform an atomic swap for a new value
 func (u *Uint64) Swap(new uint64) (old uint64) {
 	return atomic.SwapUint64(&u.v, new)

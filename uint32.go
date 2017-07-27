@@ -17,6 +17,11 @@ func (u *Uint32) Add(n uint32) (new uint32) {
 	return atomic.AddUint32(&u.v, n)
 }
 
+// Store will perform an atomic store for a new value
+func (u *Uint32) Store(new uint32) {
+	atomic.StoreUint32(&u.v, new)
+}
+
 // Swap will perform an atomic swap for a new value
 func (u *Uint32) Swap(new uint32) (old uint32) {
 	return atomic.SwapUint32(&u.v, new)

@@ -17,6 +17,11 @@ func (i *Int32) Add(n int32) (new int32) {
 	return atomic.AddInt32(&i.v, n)
 }
 
+// Store will perform an atomic store for a new value
+func (i *Int32) Store(new int32) {
+	atomic.StoreInt32(&i.v, new)
+}
+
 // Swap will perform an atomic swap for a new value
 func (i *Int32) Swap(new int32) (old int32) {
 	return atomic.SwapInt32(&i.v, new)
