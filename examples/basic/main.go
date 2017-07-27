@@ -1,11 +1,3 @@
-# Atomic
-Atomic is a helper library which provides atomic primitives. 
-
-## Purpose
-The goal of this library is to reduce the amount of mundane boilplate code associated with managing atomic-friendly values
-
-## Usage
-```go
 package main
 
 import (
@@ -29,7 +21,3 @@ func main() {
 	changed := i.CompareAndSwap(20, 40)
 	fmt.Printf("Changed: %v\n", changed)
 }
-
-```
-
-*Note - Check out the examples directory for compilable examples*
