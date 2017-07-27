@@ -1,0 +1,5 @@
+examples/int32/int32
+examples/int64/int64
+examples/uint32/uint32
+examples/uint64/uint64
+examples/bool/bool
