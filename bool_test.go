@@ -2,7 +2,7 @@ package atoms
 
 import "testing"
 
-func TestAtomicBool(t *testing.T) {
+func TestBool(t *testing.T) {
 	var b Bool
 	if b.Get() {
 		t.Fatal("invalid state")
