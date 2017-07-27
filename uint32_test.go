@@ -4,6 +4,8 @@ import (
 	"testing"
 )
 
+var testUint32Value uint32
+
 func TestUint32(t *testing.T) {
 	var u Uint32
 	if val := u.Get(); val != 0 {
@@ -27,4 +29,13 @@ func TestUint32(t *testing.T) {
 	}
 
 	return
+}
+
+func BenchmarkUint32(b *testing.B) {
+	var u Uint32
+	for i := 0; i < b.N; i++ {
+		u.Add(1)
+	}
+
+	testUint32Value = u.Get()
 }
