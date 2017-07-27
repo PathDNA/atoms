@@ -1,6 +1,5 @@
 # Atoms [![GoDoc](https://godoc.org/github.com/Path94/atoms?status.svg)](https://godoc.org/github.com/Path94/atoms) ![Status](https://img.shields.io/badge/status-beta-yellow.svg) [![Go Report Card](https://goreportcard.com/badge/github.com/Path94/atoms)](https://goreportcard.com/report/github.com/Path94/atoms)
 
-## Overview
 Atoms is a QoL helper library which provides atomic primitives.
 
 The goal of this library is to reduce the amount of mundane boilplate code associated with managing atomic-friendly values
