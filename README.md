@@ -94,7 +94,10 @@ func main() {
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
+
 	"github.com/Path94/atoms"
 )
 
@@ -105,18 +108,23 @@ func main() {
 	var v atoms.Value
 
 	// set the internal type
-	v.Store(&dummy{})
+	v.Store(dummy{})
 
-	b := []byte(`{ "v" : 0xB00F }`)
+	b := []byte(`{ "v" : 45066 }`)
 	if err := json.Unmarshal(b, &v); err != nil {
-		t.Fatal(err)
+		log.Fatal(err)
 	}
-	dv, _  := v.Load().(*dummy)
+	v.CompareAndSwap(func(oldV interface{}) (newV interface{}, ok bool) {
+		v, _ := oldV.(dummy)
+		v.V++
+		return v, true
+	})
 
-	fmt.Printf("%#+v", dv)
-	fmt.Printf("0x%X", dv.V)
+	dv, _ := v.Load().(dummy)
+
+	fmt.Printf("%#+v\n", dv)
+	fmt.Printf("0x%Xs\n", dv.V)
 }
-
 ```
 
 *Note - Check out the examples directory for compilable examples*
