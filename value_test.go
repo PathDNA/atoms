@@ -16,8 +16,6 @@ func TestValue(t *testing.T) {
 	if val, ok := v.Swap(3).(int); !ok || val != 5 {
 		t.Fatalf(testErrInvalidValueFmt, 5, val)
 	}
-
-	return
 }
 
 func TestValueJSON(t *testing.T) {

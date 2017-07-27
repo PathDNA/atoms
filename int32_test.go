@@ -26,8 +26,6 @@ func TestInt32(t *testing.T) {
 	if i.CompareAndSwap(6, 13) {
 		t.Fatalf(testErrInvalidSwapFmt)
 	}
-
-	return
 }
 
 func TestInt32JSON(t *testing.T) {
