@@ -1,6 +1,9 @@
 package atoms
 
-import "sync/atomic"
+import (
+	"encoding/json"
+	"sync/atomic"
+)
 
 // Bool is an atomic bool type
 type Bool struct {
@@ -26,4 +29,20 @@ func (b *Bool) Set(state bool) (changed bool) {
 	}
 
 	return atomic.CompareAndSwapInt32(&b.v, True, False)
+}
+
+// MarshalJSON is a json encoding helper function
+func (b *Bool) MarshalJSON() (bs []byte, err error) {
+	return json.Marshal(b.Get())
+}
+
+// UnmarshalJSON is a json decoding helper function
+func (b *Bool) UnmarshalJSON(bs []byte) (err error) {
+	var val bool
+	if err = json.Unmarshal(bs, &val); err != nil {
+		return
+	}
+
+	b.Set(val)
+	return
 }

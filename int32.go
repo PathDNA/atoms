@@ -1,6 +1,9 @@
 package atoms
 
-import "sync/atomic"
+import (
+	"encoding/json"
+	"sync/atomic"
+)
 
 // Int32 is an atomic int32
 type Int32 struct {
@@ -30,4 +33,20 @@ func (i *Int32) Swap(new int32) (old int32) {
 // CompareAndSwap will perform an atomic compare and swap for an old and new value
 func (i *Int32) CompareAndSwap(old, new int32) (changed bool) {
 	return atomic.CompareAndSwapInt32(&i.v, old, new)
+}
+
+// MarshalJSON is a json encoding helper function
+func (i *Int32) MarshalJSON() (b []byte, err error) {
+	return json.Marshal(i.Load())
+}
+
+// UnmarshalJSON is a json decoding helper function
+func (i *Int32) UnmarshalJSON(b []byte) (err error) {
+	var val int32
+	if err = json.Unmarshal(b, &val); err != nil {
+		return
+	}
+
+	i.Store(val)
+	return
 }
