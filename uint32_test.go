@@ -28,8 +28,6 @@ func TestUint32(t *testing.T) {
 	if u.CompareAndSwap(6, 13) {
 		t.Fatalf(testErrInvalidSwapFmt)
 	}
-
-	return
 }
 
 func BenchmarkUint32(b *testing.B) {

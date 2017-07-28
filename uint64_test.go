@@ -26,8 +26,6 @@ func TestUint64(t *testing.T) {
 	if u.CompareAndSwap(6, 13) {
 		t.Fatalf(testErrInvalidSwapFmt)
 	}
-
-	return
 }
 
 func TestUint64JSON(t *testing.T) {
