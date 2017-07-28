@@ -9,6 +9,7 @@ Atoms is a QoL helper library which provides atomic primitives. The goal of this
 - uint64
 - boolean
 - Value (interface{})
+
 ## Features
 ### Numeric values
 - Load
