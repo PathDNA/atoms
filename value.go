@@ -8,30 +8,30 @@ import (
 
 // Value is an atomic interface{}
 type Value struct {
-	m sync.RWMutex
-	v interface{}
+	mux sync.RWMutex
+	v   interface{}
 }
 
 // Load will get the current value
 func (av *Value) Load() (v interface{}) {
-	av.m.RLock()
+	av.mux.RLock()
 	v = av.v
-	av.m.RUnlock()
+	av.mux.RUnlock()
 	return
 }
 
 // Store will perform an atomic store for a new value
 func (av *Value) Store(v interface{}) {
-	av.m.Lock()
+	av.mux.Lock()
 	av.v = v
-	av.m.Unlock()
+	av.mux.Unlock()
 }
 
 // Swap will perform an atomic swap for a new value and return the old value
 func (av *Value) Swap(newV interface{}) (oldV interface{}) {
-	av.m.Lock()
+	av.mux.Lock()
 	oldV, av.v = av.v, newV
-	av.m.Unlock()
+	av.mux.Unlock()
 	return
 }
 
@@ -39,11 +39,11 @@ func (av *Value) Swap(newV interface{}) (oldV interface{}) {
 // fn is expected to check the old value and return the new value and true, or return false
 func (av *Value) CompareAndSwap(fn func(oldV interface{}) (newV interface{}, ok bool)) (ok bool) {
 	var newV interface{}
-	av.m.Lock()
+	av.mux.Lock()
 	if newV, ok = fn(av.v); ok {
 		av.v = newV
 	}
-	av.m.Unlock()
+	av.mux.Unlock()
 	return
 }
 
