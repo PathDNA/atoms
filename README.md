@@ -18,6 +18,7 @@ Atoms is a QoL helper library which provides atomic primitives. The goal of this
 - Load
 - Store
 - Swap
+- Add
 - CompareAndSwap
 - JSON Marshal/Unmarshal
 
@@ -33,9 +34,11 @@ Atoms is a QoL helper library which provides atomic primitives. The goal of this
 - JSON
 
 ### Generic
-- Get
-- Set (Compare and swap functionality)
-- JSON Marshal/Unmarshal with optional types.
+- Load
+- Store
+- Swap
+- CompareAndSwap
+- JSON Marshal/Unmarshal
 
 ## Usage
 ### Int64
