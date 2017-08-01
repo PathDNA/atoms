@@ -3,3 +3,4 @@ examples/int64/int64
 examples/uint32/uint32
 examples/uint64/uint64
 examples/bool/bool
+examples/string/string
