@@ -3,12 +3,15 @@
 Atoms is a QoL helper library which provides atomic primitives. The goal of this library is to reduce the amount of mundane boilplate code associated with managing atomic-friendly values
 
 ### Provided primitives
+- int
+- uint
 - int32
 - int64
 - uint32
 - uint64
 - boolean
-- Value (interface{})
+- string
+- generic value (interface{})
 
 ## Features
 ### Numeric values
@@ -22,6 +25,12 @@ Atoms is a QoL helper library which provides atomic primitives. The goal of this
 - Get
 - Set (Compare and swap functionality)
 - JSON Marshal/Unmarshal
+
+### String
+- Load
+- Store
+- Swap
+- JSON
 
 ### Generic
 - Get
