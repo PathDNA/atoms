@@ -11,7 +11,11 @@ Atoms is a QoL helper library which provides atomic primitives. The goal of this
 - uint64
 - boolean
 - string
+
+### Non-primitive helpers
 - generic value (interface{})
+- mutex wrapper
+- rwmutex wrapper
 
 ## Features
 ### Numeric values
@@ -102,6 +106,32 @@ func main() {
 
 ```
 
+### String
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/Path94/atoms"
+)
+
+func main() {
+	var s atoms.String
+	// Set value to "Hello world"
+	s.Store("Hello world")
+	current := s.Load()
+	fmt.Printf("Current value: %s\n", current)
+
+	// Swap value with "Goodbye world", returned value will be our old value
+	old := s.Swap("Goodbye world")
+	fmt.Printf("Old value: %s\n", old)
+
+	current := s.Load()
+	fmt.Printf("New current value: %s\n", current)
+}
+
+```
+
 ### Value
 ```go
 package main
@@ -141,28 +171,72 @@ func main() {
 
 ```
 
-### String
+### Mux/RWMux
 ```go
 package main
 
 import (
 	"fmt"
+	"sync"
+
 	"github.com/Path94/atoms"
 )
 
 func main() {
-	var s atoms.String
-	// Set value to "Hello world"
-	s.Store("Hello world")
-	current := s.Load()
-	fmt.Printf("Current value: %s\n", current)
+	var wg sync.WaitGroup
+	c := NewCounter()
+	wg.Add(3)
 
-	// Swap value with "Goodbye world", returned value will be our old value
-	old := s.Swap("Goodbye world")
-	fmt.Printf("Old value: %s\n", old)
+	go func() {
+		c.Increment("foo")
+		wg.Done()
+	}()
 
-	current := s.Load()
-	fmt.Printf("New current value: %s\n", current)
+	go func() {
+		c.Increment("foo")
+		wg.Done()
+	}()
+
+	go func() {
+		c.Increment("foo")
+		wg.Done()
+	}()
+
+	// Wait for all goroutines to finish
+	wg.Wait()
+
+	// Output will be 3
+	fmt.Println(c.Get("foo"))
+}
+
+// NewCounter will return a new counter
+func NewCounter() *Counter {
+	var c Counter
+	// Initialize our internal map
+	c.cm = make(map[string]uint64)
+	return &c
+}
+
+// Counter manages a counter
+type Counter struct {
+	mux atoms.RWMux
+	cm  map[string]uint64
+}
+
+// Increment will increment a given key
+func (c *Counter) Increment(key string) {
+	c.mux.Update(func() {
+		c.cm[key]++
+	})
+}
+
+// Get will get the counter value for a given key
+func (c *Counter) Get(key string) (n uint64) {
+	c.mux.Read(func() {
+		n = c.cm[key]
+	})
+
+	return
 }
 
 ```
