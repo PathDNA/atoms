@@ -13,7 +13,7 @@ func TestMux(t *testing.T) {
 	)
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
-		go mux.Do(func() {
+		go mux.Update(func() {
 			val++
 			wg.Done()
 		})

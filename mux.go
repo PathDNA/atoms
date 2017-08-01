@@ -7,8 +7,8 @@ type Mux struct {
 	mux sync.Mutex
 }
 
-// Do executes fn while the mutex is locked and guarantees the mutex is released even in the case of a panic.
-func (m *Mux) Do(fn func()) {
+// Update executes fn while the mutex is locked and guarantees the mutex is released even in the case of a panic.
+func (m *Mux) Update(fn func()) {
 	m.mux.Lock()
 	defer m.mux.Unlock()
 	fn()
