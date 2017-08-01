@@ -1,35 +1,38 @@
 package atoms
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"sync/atomic"
+)
 
 // Int is an atomic int
 type Int struct {
-	i Int64
+	v uintptr
 }
 
 // Load will get the current value
 func (i *Int) Load() (n int) {
-	return int(i.i.Load())
+	return int(atomic.LoadUintptr(&i.v))
 }
 
 // Add will increment the current value by n
 func (i *Int) Add(n int) (new int) {
-	return int(i.i.Add(int64(n)))
+	return int(atomic.AddUintptr(&i.v, uintptr(n)))
 }
 
 // Store will perform an atomic store for a new value
 func (i *Int) Store(new int) {
-	i.i.Store(int64(new))
+	atomic.StoreUintptr(&i.v, uintptr(new))
 }
 
 // Swap will perform an atomic swap for a new value
 func (i *Int) Swap(new int) (old int) {
-	return int(i.i.Swap(int64(new)))
+	return int(atomic.SwapUintptr(&i.v, uintptr(new)))
 }
 
 // CompareAndSwap will perform an atomic compare and swap for an old and new value
 func (i *Int) CompareAndSwap(old, new int) (changed bool) {
-	return i.i.CompareAndSwap(int64(old), int64(new))
+	return atomic.CompareAndSwapUintptr(&i.v, uintptr(old), uintptr(new))
 }
 
 // MarshalJSON is a json encoding helper function
