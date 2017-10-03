@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/Path94/atoms"
+
+	"github.com/PathDNA/atoms"
 )
 
 func main() {
