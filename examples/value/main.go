@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/Path94/atoms"
+	"github.com/PathDNA/atoms"
 )
 
 func main() {

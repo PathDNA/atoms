@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/Path94/atoms"
+	"github.com/PathDNA/atoms"
 )
 
 func main() {
