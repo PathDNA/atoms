@@ -4,8 +4,8 @@ import "sync"
 
 // KeyLocker allows to hold locks by key.
 type KeyLocker struct {
-	m   map[string]*sync.RWMutex
 	mux sync.RWMutex
+	m   map[string]*sync.RWMutex
 }
 
 // RWMutex returns a RWMutex for the specifc key.
