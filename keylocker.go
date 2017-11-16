@@ -10,10 +10,7 @@ type KeyLocker struct {
 
 // RWMutex returns a RWMutex for the specifc key.
 func (kl *KeyLocker) RWMutex(key string) (m *sync.RWMutex) {
-	kl.mux.RLock()
-	m = kl.m[key]
-	kl.mux.RUnlock()
-	if m != nil {
+	if m = kl.get(key); m != nil {
 		return
 	}
 
@@ -31,9 +28,7 @@ func (kl *KeyLocker) RWMutex(key string) (m *sync.RWMutex) {
 }
 
 func (kl *KeyLocker) Delete(key string) {
-	kl.mux.RLock()
-	m := kl.m[key]
-	kl.mux.RUnlock()
+	m := kl.get(key)
 	if m == nil { // lock doesn't exist, we can just return
 		return
 	}
@@ -73,4 +68,11 @@ func (kl *KeyLocker) Read(key string, fn func()) {
 	defer kl.RLock(key)()
 
 	fn()
+}
+
+func (kl *KeyLocker) get(key string) *sync.RWMutex {
+	kl.mux.RLock()
+	m := kl.m[key]
+	kl.mux.RUnlock()
+	return m
 }
