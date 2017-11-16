@@ -48,4 +48,6 @@ func TestRWKeyLocker(t *testing.T) {
 	if val != 10 {
 		t.Fatalf(testErrInvalidValueFmt, 10, val)
 	}
+
+	_ = sink
 }
