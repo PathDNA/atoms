@@ -17,6 +17,6 @@ func main() {
 	old := s.Swap("Goodbye world")
 	fmt.Printf("Old value: %s\n", old)
 
-	current := s.Load()
+	current = s.Load()
 	fmt.Printf("New current value: %s\n", current)
 }
