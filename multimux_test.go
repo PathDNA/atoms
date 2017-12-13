@@ -5,11 +5,11 @@ import (
 	"testing"
 )
 
-func TestKeyLocker(t *testing.T) {
+func TestMultiMux(t *testing.T) {
 	var (
 		val int
 		wg  sync.WaitGroup
-		mux KeyLocker
+		mux MultiMux
 	)
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
@@ -25,12 +25,12 @@ func TestKeyLocker(t *testing.T) {
 	}
 }
 
-func TestRWKeyLocker(t *testing.T) {
+func TestRWMultiMux(t *testing.T) {
 	var (
 		val  int
 		sink int
 		wg   sync.WaitGroup
-		mux  KeyLocker
+		mux  MultiMux
 	)
 	for i := 0; i < 10; i++ {
 		wg.Add(2)
